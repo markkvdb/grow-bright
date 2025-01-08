@@ -1,0 +1,108 @@
+<div class="container mx-auto px-4 py-8">
+  <div class="mb-6">
+    <div class="flex justify-between items-center">
+      <h1 class="text-3xl font-bold"><%= @child.first_name %></h1>
+      <div class="space-x-2">
+        <%= link_to "Edit", edit_child_path(@child), 
+            class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+        <%= link_to "Back", children_path, 
+            class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
+      </div>
+    </div>
+    <p class="text-gray-600">
+      Age: <%= display_age(@child) %>
+      (<%= @child.birth_date.strftime("%B %d, %Y") %>)
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Recent Feedings -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Recent Feedings</h2>
+        <%= link_to "Add Feeding", new_child_feeding_path(@child), 
+            class: "text-blue-500 hover:text-blue-700" %>
+      </div>
+      <div class="space-y-3">
+        <% @recent_feedings.each do |feeding| %>
+          <div class="border-b pb-2">
+            <p class="font-medium"><%= feeding.feeding_type.titleize %></p>
+            <p class="text-sm text-gray-600">
+              <%= feeding.start_time.strftime("%I:%M %p") %>
+              (<%= feeding.duration_minutes %> minutes)
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Recent Diaper Changes -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Recent Diaper Changes</h2>
+        <%= link_to "Add Change", new_child_diaper_change_path(@child), 
+            class: "text-blue-500 hover:text-blue-700" %>
+      </div>
+      <div class="space-y-3">
+        <% @recent_diapers.each do |change| %>
+          <div class="border-b pb-2">
+            <p class="font-medium"><%= change.change_type.titleize %></p>
+            <p class="text-sm text-gray-600">
+              <%= change.time.strftime("%I:%M %p") %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Recent Activities</h2>
+        <%= link_to "Add Activity", new_child_activity_path(@child), 
+            class: "text-blue-500 hover:text-blue-700" %>
+      </div>
+      <div class="space-y-3">
+        <% @recent_activities.each do |activity| %>
+          <div class="border-b pb-2">
+            <p class="font-medium"><%= activity.activity_type.titleize %></p>
+            <p class="text-sm text-gray-600">
+              <%= activity.start_time.strftime("%I:%M %p") %>
+              (<%= ((activity.end_time - activity.start_time) / 60).round %> minutes)
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Latest Measurements -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Latest Measurements</h2>
+        <%= link_to "Add Measurement", new_child_measurement_path(@child), 
+            class: "text-blue-500 hover:text-blue-700" %>
+      </div>
+      <% if @recent_measurements.any? %>
+        <% measurement = @recent_measurements.first %>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="text-sm text-gray-600">Weight</p>
+            <p class="font-medium"><%= measurement.weight %></p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600">Length</p>
+            <p class="font-medium"><%= measurement.length %></p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600">Head</p>
+            <p class="font-medium"><%= measurement.head_circumference %></p>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600">Date</p>
+            <p class="font-medium"><%= measurement.date.strftime("%b %d") %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div> 

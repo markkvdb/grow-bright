@@ -1,0 +1,4 @@
+baby:
+  first_name: "Baby"
+  last_name: "Smith"
+  birth_date: <%= 6.months.ago %> 

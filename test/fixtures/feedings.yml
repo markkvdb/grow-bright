@@ -1,0 +1,25 @@
+bottle_feeding:
+  child: baby
+  caregiver: mom
+  feeding_type: bottle
+  start_time: <%= 1.hour.ago %>
+  end_time: <%= 50.minutes.ago %>
+  volume_value: 120
+  volume_unit: ml
+
+solid_feeding:
+  child: baby
+  caregiver: mom
+  feeding_type: solid
+  start_time: <%= 2.hours.ago %>
+  end_time: <%= 50.minutes.ago %>
+  weight_value: 50
+  weight_unit: g
+
+breast_feeding:
+  child: baby
+  caregiver: mom
+  feeding_type: breast
+  start_time: <%= 3.hours.ago %>
+  end_time: <%= 50.minutes.ago %>
+  side: left

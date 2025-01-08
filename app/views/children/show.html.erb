@@ -48,7 +48,12 @@
 
     <!-- Recent Activities -->
     <div class="bg-white rounded-lg shadow p-6">
-      <div class="mt-4">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Recent Activities</h2>
+        <%= link_to "Add Activity", new_child_activity_path(@child), 
+            class: "text-blue-500 hover:text-blue-700" %>
+      </div>
+      <div class="space-y-3">
         <%= render partial: "activity", collection: @recent_activities %>
       </div>
     </div>

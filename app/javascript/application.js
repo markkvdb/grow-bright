@@ -2,3 +2,4 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "controllers/image_modal_controller"
+import "controllers/notification_controller"

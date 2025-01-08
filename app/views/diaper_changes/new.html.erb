@@ -1,0 +1,10 @@
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="mb-8">
+    <h1 class="text-2xl font-bold text-gray-900">Record Diaper Change</h1>
+    <p class="mt-2 text-sm text-gray-600">
+      Record a diaper change for <%= @child.first_name %>
+    </p>
+  </div>
+
+  <%= render "form", child: @child, diaper_change: @diaper_change %>
+</div> 

@@ -59,6 +59,28 @@
         <% end %>
       </div>
     </div>
+
+    <div>
+      <%= form.label :avatar, class: "block text-sm font-medium text-gray-700" %>
+      <div class="mt-1 flex items-center space-x-4">
+        <% if form.object.avatar.attached? %>
+          <%= image_tag form.object.avatar_medium, 
+              class: "h-12 w-12 rounded-full object-cover" %>
+        <% else %>
+          <%= image_tag "baby-silhouette.svg", 
+              class: "h-12 w-12 rounded-full bg-gray-100 p-2" %>
+        <% end %>
+
+        <div class="flex">
+          <label class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+            <span>Change</span>
+            <%= form.file_field :avatar, 
+                class: "sr-only",
+                accept: "image/jpeg,image/jpg,image/png" %>
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="flex justify-end space-x-3">

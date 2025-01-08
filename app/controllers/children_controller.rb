@@ -56,7 +56,8 @@ class ChildrenController < ApplicationController
       :birth_weight_unit,
       :birth_length_value,
       :birth_length_unit,
-      caregiver_ids: []
+      caregiver_ids: [],
+      avatar: []
     )
   end
 end 

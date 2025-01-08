@@ -43,6 +43,17 @@ class ActivitiesController < ApplicationController
     redirect_to child_path(@child), notice: 'Activity was successfully deleted.'
   end
 
+  def remove_image
+    @activity = @child.activities.find(params[:id])
+    image = @activity.images.find(params[:image_id])
+    image.purge
+    
+    respond_to do |format|
+      format.html { redirect_to edit_child_activity_path(@child, @activity), notice: 'Image was successfully removed.' }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(image) }
+    end
+  end
+
   private
 
   def set_child
@@ -60,7 +71,8 @@ class ActivitiesController < ApplicationController
       :end_time,
       :milestone,
       :notes,
-      :caregiver_id
+      :caregiver_id,
+      images: []
     )
   end
 end 

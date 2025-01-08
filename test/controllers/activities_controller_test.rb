@@ -65,4 +65,41 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to child_path(@child)
   end
+
+  test "creates activity with images" do
+    assert_difference "Activity.count" do
+      post child_activities_path(@child), params: {
+        activity: {
+          activity_type: "play",
+          start_time: Time.current,
+          end_time: Time.current + 15.minutes,
+          caregiver_id: @caregiver.id,
+          images: [
+            fixture_file_upload("test_image1.jpg", "image/jpeg"),
+            fixture_file_upload("test_image2.jpg", "image/jpeg")
+          ]
+        }
+      }
+    end
+
+    activity = Activity.last
+    assert_equal 2, activity.images.count
+  end
+
+  test "rejects oversized images" do
+    post child_activities_path(@child), params: {
+      activity: {
+        activity_type: "play",
+        start_time: Time.current,
+        end_time: Time.current + 15.minutes,
+        caregiver_id: @caregiver.id,
+        images: [
+          fixture_file_upload("large_image.jpg", "image/jpeg")
+        ]
+      }
+    }
+
+    assert_response :unprocessable_entity
+    assert_includes @response.body, "Images size must be less than 10MB"
+  end
 end 

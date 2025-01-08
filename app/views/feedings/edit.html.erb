@@ -1,9 +1,9 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="max-w-3xl mx-auto">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold">Edit Feeding for <%= @child.first_name %></h1>
-    </div>
+<% content_for :breadcrumb_action, "Edit Feeding" %>
 
-    <%= render "form", feeding: @feeding %>
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold">Edit Feeding for <%= @child.first_name %></h1>
   </div>
+
+  <%= render "form", feeding: @feeding %>
 </div> 

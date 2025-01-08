@@ -9,7 +9,7 @@ class ChildrenController < ApplicationController
     @recent_feedings = @child.feedings.order(start_time: :desc).limit(5)
     @recent_diapers = @child.diaper_changes.order(time: :desc).limit(5)
     @recent_activities = @child.activities.order(start_time: :desc).limit(5)
-    @recent_measurements = @child.measurements.order(date: :desc).limit(1)
+    @recent_measurements = @child.measurements.order(date: :desc).limit(5)
   end
 
   def new

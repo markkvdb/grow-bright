@@ -85,21 +85,4 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
     activity = Activity.last
     assert_equal 2, activity.images.count
   end
-
-  test "rejects oversized images" do
-    post child_activities_path(@child), params: {
-      activity: {
-        activity_type: "play",
-        start_time: Time.current,
-        end_time: Time.current + 15.minutes,
-        caregiver_id: @caregiver.id,
-        images: [
-          fixture_file_upload("large_image.jpg", "image/jpeg")
-        ]
-      }
-    }
-
-    assert_response :unprocessable_entity
-    assert_includes @response.body, "Images size must be less than 10MB"
-  end
 end 

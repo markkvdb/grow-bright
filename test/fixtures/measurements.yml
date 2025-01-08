@@ -1,0 +1,22 @@
+birth:
+  child: baby
+  caregiver: mom
+  date: <%= 6.months.ago.to_date %>
+  weight_value: 3.5
+  weight_unit: kg
+  length_value: 50
+  length_unit: cm
+  head_circumference_value: 35
+  head_circumference_unit: cm
+  notes: "Birth measurements"
+
+one_month:
+  child: baby
+  caregiver: mom
+  date: <%= 5.months.ago.to_date %>
+  weight_value: 4.2
+  weight_unit: kg
+  length_value: 54
+  length_unit: cm
+  head_circumference_value: 37
+  head_circumference_unit: cm 

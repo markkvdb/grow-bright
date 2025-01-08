@@ -1,0 +1,17 @@
+tummy_time:
+  child: baby
+  caregiver: mom
+  activity_type: tummy_time
+  start_time: <%= 1.hour.ago %>
+  end_time: <%= 45.minutes.ago %>
+  milestone: false
+  notes: "Regular tummy time"
+
+play_milestone:
+  child: baby
+  caregiver: mom
+  activity_type: play
+  start_time: <%= 2.hours.ago %>
+  end_time: <%= 2.hours.ago + 30.minutes %>
+  milestone: true
+  notes: "First time grabbing toy!" 

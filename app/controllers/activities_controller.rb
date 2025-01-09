@@ -43,17 +43,6 @@ class ActivitiesController < ApplicationController
     redirect_to child_path(@child), notice: 'Activity was successfully deleted.'
   end
 
-  def remove_image
-    @activity = @child.activities.find(params[:id])
-    image = @activity.images.find(params[:image_id])
-    image.purge
-    
-    respond_to do |format|
-      format.html { redirect_to edit_child_activity_path(@child, @activity), notice: 'Image was successfully removed.' }
-      format.turbo_stream { render turbo_stream: turbo_stream.remove(image) }
-    end
-  end
-
   private
 
   def set_child
@@ -65,14 +54,21 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(
+    super_params = params.require(:activity).permit(
       :activity_type,
       :start_time,
       :end_time,
-      :milestone,
       :notes,
+      :milestone,
       :caregiver_id,
-      images: []
+      :images # This will receive a comma-separated list of signed IDs
     )
+
+    # Convert comma-separated signed IDs to array of blobs
+    if super_params[:images].present?
+      super_params[:images] = super_params[:images].split(',')
+    end
+
+    super_params
   end
 end 

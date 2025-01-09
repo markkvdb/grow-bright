@@ -5,15 +5,33 @@
       <div class="grid grid-cols-3 gap-4 mt-1">
         <div>
           <p class="text-sm text-gray-600">Weight</p>
-          <p class="text-sm font-medium"><%= measurement.weight_value %> <%= measurement.weight_unit %></p>
+          <p class="text-sm font-medium">
+            <% if measurement.weight_value? %>
+              <%= measurement.weight_value %> <%= measurement.weight_unit %>
+            <% else %>
+              &mdash;
+            <% end %>
+          </p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Length</p>
-          <p class="text-sm font-medium"><%= measurement.length_value %> <%= measurement.length_unit %></p>
+          <p class="text-sm font-medium">
+            <% if measurement.length_value? %>
+              <%= measurement.length_value %> <%= measurement.length_unit %>
+            <% else %>
+              &mdash;
+            <% end %>
+          </p>
         </div>
         <div>
           <p class="text-sm text-gray-600">Head</p>
-          <p class="text-sm font-medium"><%= measurement.head_circumference_value %> <%= measurement.head_circumference_unit %></p>
+          <p class="text-sm font-medium">
+            <% if measurement.head_circumference_value? %>
+              <%= measurement.head_circumference_value %> <%= measurement.head_circumference_unit %>
+            <% else %>
+              &mdash;
+            <% end %>
+          </p>
         </div>
       </div>
       <p class="text-sm text-gray-500 mt-1">

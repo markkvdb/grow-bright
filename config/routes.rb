@@ -15,11 +15,7 @@ Rails.application.routes.draw do
   resources :children do
     resources :feedings
     resources :diaper_changes
-    resources :activities do
-      member do
-        delete :remove_image
-      end
-    end
+    resources :activities
     resources :measurements
   end
 

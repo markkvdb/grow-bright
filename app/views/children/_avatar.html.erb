@@ -1,0 +1,12 @@
+<% size ||= :medium %>
+<% css_classes ||= "h-12 w-12 rounded-full object-cover" %>
+
+<% if child.avatar.attached? %>
+  <%= image_tag child.avatar.variant(size), 
+      class: css_classes,
+      alt: "#{child.first_name}'s photo" %>
+<% else %>
+  <%= image_tag "baby-silhouette.svg", 
+      class: "#{css_classes} bg-gray-100 p-2",
+      alt: "Default baby silhouette" %>
+<% end %> 

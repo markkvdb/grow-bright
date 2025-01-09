@@ -51,13 +51,13 @@ class ChildrenController < ApplicationController
     params.require(:child).permit(
       :first_name, 
       :last_name, 
-      :birth_date, 
+      :birth_date,
       :birth_weight_value,
       :birth_weight_unit,
       :birth_length_value,
       :birth_length_unit,
-      caregiver_ids: [],
-      avatar: []
+      :avatar,
+      caregiver_ids: []
     )
   end
 end 

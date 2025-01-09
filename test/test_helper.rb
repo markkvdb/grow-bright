@@ -14,4 +14,14 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   include MeasuredHelpers
+
+  setup do
+    # Store files locally.
+    ActiveStorage::Current.url_options = { host: "localhost" }
+  end
+
+  teardown do
+    # Clean up uploaded files after each test
+    FileUtils.rm_rf(ActiveStorage::Blob.service.root)
+  end
 end

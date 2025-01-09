@@ -1,7 +1,7 @@
 class Child < ApplicationRecord
   has_one_attached :avatar do |attachable|
     attachable.variant :thumb, resize_to_fill: [40, 40]
-    attachable.variant :medium, resize_to_fill: [100, 100]
+    attachable.variant :medium, resize_to_fill: [96, 96]
   end
 
   has_many :children_caregivers, dependent: :destroy
@@ -28,21 +28,5 @@ class Child < ApplicationRecord
 
   def age_in_months
     ((Time.zone.now - birth_date.to_time) / 1.month.seconds).floor
-  end
-
-  def avatar_thumbnail
-    if avatar.attached?
-      avatar.variant(:thumb)
-    else
-      "baby-silhouette.svg"
-    end
-  end
-
-  def avatar_medium
-    if avatar.attached?
-      avatar.variant(:medium)
-    else
-      "baby-silhouette.svg"
-    end
   end
 end 

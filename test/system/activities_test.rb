@@ -239,7 +239,7 @@ class ActivitiesTest < ApplicationSystemTestCase
     # Now edit, remove one image and add a new one
     click_on "Edit"
     
-    first("input[name='activity[images_to_purge][]']").check
+    find("[data-action='image-modal#delete']").click
     attach_file "Images", Rails.root.join("test/fixtures/files/test_image3.jpg")
     
     click_on "Update Activity"

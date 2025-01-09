@@ -8,9 +8,7 @@ export default class extends Controller {
 
   connect() {
     // Start the progress bar animation
-    requestAnimationFrame(() => {
-      this.progressTarget.style.width = "0%"
-    })
+    requestAnimationFrame(() => {})
 
     // Automatically hide after duration
     this.timeout = setTimeout(() => {

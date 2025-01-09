@@ -10,8 +10,10 @@
       <%= link_to child_path(child), class: "block" do %>
         <div class="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow">
           <div class="flex items-center space-x-4">
-            <%= image_tag child.avatar_thumbnail, 
-                class: "h-10 w-10 rounded-full object-cover #{'bg-gray-100 p-2' unless child.avatar.attached?}" %>
+            <%= render "children/avatar", 
+                child: child, 
+                size: :thumb, 
+                css_classes: "h-10 w-10 rounded-full object-cover" %>
             <div>
               <h2 class="text-xl font-semibold text-gray-900"><%= child.first_name %></h2>
               <p class="text-sm text-gray-500">

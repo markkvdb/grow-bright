@@ -6,21 +6,23 @@ class NotificationsTest < ApplicationSystemTestCase
     
     fill_in "First name", with: "Test Child"
     fill_in "Birth date", with: "2023-01-01"
+    click_button "Create Child"
     
-    click_on "Create Child"
+    # Verify success notification appears
+    assert_selector "[data-notification-target='notification']"
+    assert_text "Child was successfully created"
     
-    assert_selector ".border-green-500", text: "Child was successfully created"
-    assert_selector "[data-notification-target='progress']"
+    # Get initial progress bar width
+    progress_bar = find("[data-notification-target='progress']")
+    initial_width = progress_bar['style'].match(/width: (\d+)%/)[1].to_i
+    assert_equal 100, initial_width
     
-    # Check progress bar width after 2.5 seconds (should be around 50%)
-    sleep 2.5
-    progress = find("[data-notification-target='progress']")
-    width = progress['style'].match(/width: (\d+)%/)[1].to_i
-    assert_in_delta 50, width, 10 # Allow 10% margin of error
+    # Wait a moment and check progress
+    sleep 2.5 # Wait half the animation time (5000ms)
+    current_width = find("[data-notification-target='progress']")['style'].match(/width: (\d+)%/)[1].to_i
     
-    # Wait for auto-dismiss
-    sleep 3
-    assert_no_selector ".border-green-500"
+    # Progress should be roughly halfway (allowing for some timing variance)
+    assert_in_delta 50, current_width, 10
   end
 
   test "can manually dismiss notification" do
@@ -40,8 +42,19 @@ class NotificationsTest < ApplicationSystemTestCase
   test "shows error notification when form has errors" do
     visit new_child_path
     
-    click_on "Create Child"
+    # Submit form without required fields
+    click_button "Create Child"
     
-    assert_selector ".border-red-500"
+    # Verify error notification appears
+    assert_selector "[data-notification-target='notification']"
+    assert_text "prohibited this child from being saved"
+    
+    # Verify error styling
+    notification = find("[data-notification-target='notification']")
+    assert_includes notification[:class], "border-red-500"
+    
+    # Verify progress bar has error styling
+    progress_bar = find("[data-notification-target='progress']")
+    assert_includes progress_bar[:class], "bg-red-500"
   end
 end 

@@ -33,18 +33,9 @@ en:
     x_days:
       one: "%{count} day old"
       other: "%{count} days old"
-    about_x_days:
-      one: "%{count} day old"
-      other: "%{count} days old"
     x_months:
       one: "%{count} month old"
       other: "%{count} months old"
-    about_x_months:
-      one: "%{count} month old"
-      other: "%{count} months old"
     x_years:
-      one: "%{count} year old"
-      other: "%{count} years old"
-    about_x_years:
       one: "%{count} year old"
       other: "%{count} years old"

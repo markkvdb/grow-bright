@@ -3,18 +3,9 @@ es:
     x_days:
       one: "1 día de edad"
       other: "%{count} días de edad"
-      about_x_days:
-        one: "%{count} día de edad"
-        other: "%{count} días de edad"
     x_months:
       one: "1 mes de edad"
       other: "%{count} meses de edad"
-      about_x_months:
-        one: "%{count} mes de edad"
-        other: "%{count} meses de edad"
     x_years:
       one: "1 año de edad"
       other: "%{count} años de edad" 
-    about_x_years:
-        one: "%{count} año de edad"
-        other: "%{count} años de edad"

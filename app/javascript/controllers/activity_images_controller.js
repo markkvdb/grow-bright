@@ -46,7 +46,7 @@ export default class extends Controller {
     })
   }
 
-  removeImage(event) {
+  remove(event) {
     const container = event.target.closest("[data-activity-images-image-id]")
     const imageId = container.dataset.activityImagesImageId
     
@@ -90,7 +90,7 @@ export default class extends Controller {
     const button = document.createElement('button')
     button.type = 'button'
     button.className = 'text-white bg-red-500 rounded-full p-1.5 hover:bg-red-600'
-    button.dataset.action = 'activity-images#removeImage'
+    button.dataset.action = 'activity-images#remove'
     button.innerHTML = `
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

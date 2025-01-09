@@ -1,5 +1,5 @@
 class ChildrenController < ApplicationController
-  before_action :set_child, only: [:show, :edit, :update, :destroy]
+  before_action :set_child, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @children = Child.all
@@ -19,7 +19,7 @@ class ChildrenController < ApplicationController
   def create
     @child = Child.new(child_params)
     if @child.save
-      redirect_to @child, notice: 'Child was successfully created.'
+      redirect_to @child, notice: "Child was successfully recorded."
     else
       render :new, status: :unprocessable_entity
     end
@@ -30,7 +30,7 @@ class ChildrenController < ApplicationController
 
   def update
     if @child.update(child_params)
-      redirect_to @child, notice: 'Child was successfully updated.'
+      redirect_to @child, notice: "Child was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -38,7 +38,7 @@ class ChildrenController < ApplicationController
 
   def destroy
     @child.destroy
-    redirect_to children_url, notice: 'Child was successfully deleted.'
+    redirect_to children_url, notice: "Child was successfully deleted."
   end
 
   private
@@ -49,8 +49,8 @@ class ChildrenController < ApplicationController
 
   def child_params
     params.require(:child).permit(
-      :first_name, 
-      :last_name, 
+      :first_name,
+      :last_name,
       :birth_date,
       :birth_weight_value,
       :birth_weight_unit,
@@ -60,4 +60,4 @@ class ChildrenController < ApplicationController
       caregiver_ids: []
     )
   end
-end 
+end

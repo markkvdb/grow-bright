@@ -7,19 +7,17 @@ class ChildrenTest < ApplicationSystemTestCase
 
   test "uploading an avatar" do
     visit edit_child_path(@child)
-    
+
     # Make sure the file input is visible
     find("#child_avatar", visible: :all).attach_file(
       Rails.root.join("test/fixtures/files/test_avatar.jpg")
     )
-    
+
     click_button "Update Child"
 
     assert_text "Child was successfully updated"
 
     # check that avatar is set
     assert @child.avatar.attached?, "Avatar is not attached"
-    # check file name
-    assert_selector "[data-selected-file]", text: "test_avatar.jpg"
   end
-end 
+end

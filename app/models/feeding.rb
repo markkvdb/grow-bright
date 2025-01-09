@@ -36,4 +36,4 @@ class Feeding < ApplicationRecord
     return nil unless start_time && end_time
     ((end_time - start_time) / 60).round
   end
-end 
+end

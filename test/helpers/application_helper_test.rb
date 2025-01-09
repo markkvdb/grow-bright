@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class ApplicationHelperTest < ActionView::TestCase
   test "displays age in days for newborns" do
@@ -50,4 +50,4 @@ class ApplicationHelperTest < ActionView::TestCase
       end
     end
   end
-end 
+end

@@ -58,4 +58,4 @@ class DiaperChangesControllerTest < ActionDispatch::IntegrationTest
     assert_nil diaper_change&.color
     assert_nil diaper_change&.consistency
   end
-end 
+end

@@ -3,13 +3,13 @@ class ChildrenCaregiver < ApplicationRecord
   belongs_to :caregiver
 
   validates :relationship, presence: true
-  
+
   RELATIONSHIPS = [
-    'parent',
-    'grandparent',
-    'nanny',
-    'other'
+    "parent",
+    "grandparent",
+    "nanny",
+    "other"
   ].freeze
 
   validates :relationship, inclusion: { in: RELATIONSHIPS }
-end 
+end

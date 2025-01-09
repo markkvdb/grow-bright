@@ -4,7 +4,7 @@ class CreateChildrenCaregivers < ActiveRecord::Migration[8.0]
       t.references :child, null: false, foreign_key: true
       t.references :caregiver, null: false, foreign_key: true
 
-      t.index [:child_id, :caregiver_id], unique: true
+      t.index [ :child_id, :caregiver_id ], unique: true
     end
   end
-end 
+end

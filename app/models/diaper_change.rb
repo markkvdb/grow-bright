@@ -34,4 +34,4 @@ class DiaperChange < ApplicationRecord
       errors.add(:consistency, "must be specified for solid diaper changes")
     end
   end
-end 
+end

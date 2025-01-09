@@ -3,7 +3,7 @@ require_relative "../config/environment"
 require "rails/test_help"
 
 # Load all files from test/support
-Dir[Rails.root.join('test', 'support', '**', '*.rb')].each { |f| require f }
+Dir[Rails.root.join("test", "support", "**", "*.rb")].each { |f| require f }
 
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers

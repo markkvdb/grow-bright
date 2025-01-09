@@ -3,4 +3,4 @@ module MeasuredHelpers
     assert_equal expected.value, actual.value, "#{message} - values do not match"
     assert_equal expected.unit, actual.unit, "#{message} - units do not match"
   end
-end 
+end

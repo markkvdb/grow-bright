@@ -9,4 +9,4 @@ class CreateCaregivers < ActiveRecord::Migration[8.0]
       t.timestamps
     end
   end
-end 
+end

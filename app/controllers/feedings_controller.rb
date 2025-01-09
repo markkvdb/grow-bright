@@ -1,13 +1,13 @@
 class FeedingsController < ApplicationController
   before_action :set_child
-  before_action :set_feeding, only: [:show, :edit, :update, :destroy]
+  before_action :set_feeding, only: [ :show, :edit, :update, :destroy ]
 
-  FEEDING_BASE_PARAMS = [:feeding_type, :caregiver_id, :start_time, :end_time, :notes].freeze
-  
+  FEEDING_BASE_PARAMS = [ :feeding_type, :caregiver_id, :start_time, :end_time, :notes ].freeze
+
   FEEDING_TYPE_PARAMS = {
-    'bottle' => [:volume_value, :volume_unit],
-    'solid'  => [:weight_value, :weight_unit],
-    'breast' => [:side]
+    "bottle" => [ :volume_value, :volume_unit ],
+    "solid"  => [ :weight_value, :weight_unit ],
+    "breast" => [ :side ]
   }.freeze
 
   def index
@@ -29,7 +29,7 @@ class FeedingsController < ApplicationController
     @feeding = @child.feedings.build(feeding_params)
 
     if @feeding.save
-      redirect_to child_path(@child), notice: 'Feeding was successfully recorded.'
+      redirect_to child_path(@child), notice: "Feeding was successfully recorded."
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class FeedingsController < ApplicationController
 
   def update
     if @feeding.update(feeding_params)
-      redirect_to child_path(@child), notice: 'Feeding was successfully updated.'
+      redirect_to child_path(@child), notice: "Feeding was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -48,7 +48,7 @@ class FeedingsController < ApplicationController
 
   def destroy
     @feeding.destroy
-    redirect_to child_path(@child), notice: 'Feeding was successfully deleted.'
+    redirect_to child_path(@child), notice: "Feeding was successfully deleted."
   end
 
   private
@@ -64,7 +64,7 @@ class FeedingsController < ApplicationController
   def feeding_params
     feeding_type = params.dig(:feeding, :feeding_type)
     permitted_params = FEEDING_BASE_PARAMS + (FEEDING_TYPE_PARAMS[feeding_type] || [])
-    
+
     params.require(:feeding).permit(*permitted_params)
   end
-end 
+end

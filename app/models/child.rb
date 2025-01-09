@@ -1,12 +1,12 @@
 class Child < ApplicationRecord
   has_one_attached :avatar do |attachable|
-    attachable.variant :thumb, resize_to_fill: [40, 40]
-    attachable.variant :medium, resize_to_fill: [96, 96]
+    attachable.variant :thumb, resize_to_fill: [ 40, 40 ]
+    attachable.variant :medium, resize_to_fill: [ 96, 96 ]
   end
 
   has_many :children_caregivers, dependent: :destroy
   has_many :caregivers, through: :children_caregivers
-  
+
   has_many :feedings, dependent: :destroy
   has_many :diaper_changes, dependent: :destroy
   has_many :sleep_sessions, dependent: :destroy
@@ -29,4 +29,4 @@ class Child < ApplicationRecord
   def age_in_months
     ((Time.zone.now - birth_date.to_time) / 1.month.seconds).floor
   end
-end 
+end

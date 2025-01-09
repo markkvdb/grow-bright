@@ -61,4 +61,4 @@ class MeasurementsControllerTest < ActionDispatch::IntegrationTest
 
     assert_redirected_to child_path(@child)
   end
-end 
+end

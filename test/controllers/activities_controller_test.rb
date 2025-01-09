@@ -74,7 +74,7 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
       filename: "test_image1.jpg",
       content_type: "image/jpeg"
     )
-    
+
     assert_difference("Activity.count") do
       post child_activities_path(@child), params: {
         activity: {
@@ -100,13 +100,13 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
       content_type: "image/jpeg"
     )
     initial_image_id = @activity.images.first.signed_id
-    
+
     patch child_activity_path(@child, @activity), params: {
       activity: {
         images: initial_image_id
       }
     }
-    
+
     @activity.reload
     assert_equal 1, @activity.images.count
     assert_redirected_to child_path(@child)
@@ -119,14 +119,14 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
       filename: "test_image1.jpg",
       content_type: "image/jpeg"
     )
-    
+
     # Remove all images
     patch child_activity_path(@child, @activity), params: {
       activity: {
         images: ""
       }
     }
-    
+
     @activity.reload
     assert_equal 0, @activity.images.count
     assert_redirected_to child_path(@child)
@@ -139,7 +139,7 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
       filename: "invalid.txt",
       content_type: "text/plain"
     )
-    
+
     assert_no_difference("Activity.count") do
       post child_activities_path(@child), params: {
         activity: {
@@ -151,7 +151,7 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
         }
       }
     end
-    
+
     assert_response :unprocessable_entity
   end
 
@@ -161,9 +161,9 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
         images: ""
       }
     }
-    
+
     @activity.reload
     assert_equal 0, @activity.images.count
     assert_redirected_to child_path(@child)
   end
-end 
+end

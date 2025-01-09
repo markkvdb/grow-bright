@@ -48,4 +48,4 @@ class FeedingTest < ActiveSupport::TestCase
     )
     assert feeding.valid?
   end
-end 
+end

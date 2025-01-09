@@ -90,4 +90,4 @@ class FeedingsControllerTest < ActionDispatch::IntegrationTest
     assert_nil feeding&.weight_value
     assert_nil feeding&.weight_unit
   end
-end 
+end

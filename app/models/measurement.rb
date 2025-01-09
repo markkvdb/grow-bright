@@ -17,8 +17,8 @@ class Measurement < ApplicationRecord
   private
 
   def set_default_units
-    self.weight_unit ||= 'kg'
-    self.length_unit ||= 'cm'
-    self.head_circumference_unit ||= 'cm'
+    self.weight_unit ||= "kg"
+    self.length_unit ||= "cm"
+    self.head_circumference_unit ||= "cm"
   end
-end 
+end

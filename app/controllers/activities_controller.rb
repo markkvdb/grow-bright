@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :set_child
-  before_action :set_activity, only: [:show, :edit, :update, :destroy]
+  before_action :set_activity, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @activities = @child.activities.order(start_time: :desc)
@@ -21,7 +21,7 @@ class ActivitiesController < ApplicationController
     @activity = @child.activities.build(activity_params)
 
     if @activity.save
-      redirect_to child_path(@child), notice: 'Activity was successfully recorded.'
+      redirect_to child_path(@child), notice: "Activity was successfully recorded."
     else
       render :new, status: :unprocessable_entity
     end
@@ -32,7 +32,7 @@ class ActivitiesController < ApplicationController
 
   def update
     if @activity.update(activity_params)
-      redirect_to child_path(@child), notice: 'Activity was successfully updated.'
+      redirect_to child_path(@child), notice: "Activity was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +40,7 @@ class ActivitiesController < ApplicationController
 
   def destroy
     @activity.destroy
-    redirect_to child_path(@child), notice: 'Activity was successfully deleted.'
+    redirect_to child_path(@child), notice: "Activity was successfully deleted."
   end
 
   private
@@ -66,9 +66,9 @@ class ActivitiesController < ApplicationController
 
     # Convert comma-separated signed IDs to array of blobs
     if super_params[:images].present?
-      super_params[:images] = super_params[:images].split(',')
+      super_params[:images] = super_params[:images].split(",")
     end
 
     super_params
   end
-end 
+end

@@ -14,4 +14,4 @@ class SleepSession < ApplicationRecord
   validates :start_time, presence: true
   validates :end_time, comparison: { greater_than: :start_time }, allow_nil: true
   validates :notes, length: { maximum: 65535 } # TEXT limit
-end 
+end

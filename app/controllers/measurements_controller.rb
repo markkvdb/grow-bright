@@ -1,6 +1,6 @@
 class MeasurementsController < ApplicationController
   before_action :set_child
-  before_action :set_measurement, only: [:show, :edit, :update, :destroy]
+  before_action :set_measurement, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @measurements = @child.measurements.order(date: :desc)
@@ -20,7 +20,7 @@ class MeasurementsController < ApplicationController
     @measurement = @child.measurements.build(measurement_params)
 
     if @measurement.save
-      redirect_to child_path(@child), notice: 'Measurement was successfully recorded.'
+      redirect_to child_path(@child), notice: "Measurement was successfully recorded."
     else
       render :new, status: :unprocessable_entity
     end
@@ -31,7 +31,7 @@ class MeasurementsController < ApplicationController
 
   def update
     if @measurement.update(measurement_params)
-      redirect_to child_path(@child), notice: 'Measurement was successfully updated.'
+      redirect_to child_path(@child), notice: "Measurement was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class MeasurementsController < ApplicationController
 
   def destroy
     @measurement.destroy
-    redirect_to child_path(@child), notice: 'Measurement was successfully deleted.'
+    redirect_to child_path(@child), notice: "Measurement was successfully deleted."
   end
 
   private
@@ -65,4 +65,4 @@ class MeasurementsController < ApplicationController
       :caregiver_id
     )
   end
-end 
+end

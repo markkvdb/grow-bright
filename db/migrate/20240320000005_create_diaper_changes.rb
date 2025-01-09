@@ -14,4 +14,4 @@ class CreateDiaperChanges < ActiveRecord::Migration[8.0]
       t.index :time
     end
   end
-end 
+end

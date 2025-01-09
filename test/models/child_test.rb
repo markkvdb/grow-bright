@@ -55,4 +55,4 @@ class ChildTest < ActiveSupport::TestCase
     assert_measured_equals expected_weight, child.birth_weight
     assert_measured_equals expected_length, child.birth_length
   end
-end 
+end

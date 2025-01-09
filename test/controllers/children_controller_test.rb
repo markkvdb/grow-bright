@@ -17,15 +17,15 @@ class ChildrenControllerTest < ActionDispatch::IntegrationTest
 
   test "should create child" do
     assert_difference("Child.count") do
-      post children_url, params: { 
-        child: { 
+      post children_url, params: {
+        child: {
           first_name: "Test Child",
           birth_date: Date.current,
           birth_weight_value: 3.5,
           birth_weight_unit: "kg",
           birth_length_value: 50,
           birth_length_unit: "cm"
-        } 
+        }
       }
     end
 
@@ -43,10 +43,10 @@ class ChildrenControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update child" do
-    patch child_url(@child), params: { 
-      child: { 
+    patch child_url(@child), params: {
+      child: {
         first_name: "Updated Name"
-      } 
+      }
     }
     assert_redirected_to child_url(@child)
     @child.reload
@@ -63,11 +63,11 @@ class ChildrenControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create child with invalid attributes" do
     assert_no_difference("Child.count") do
-      post children_url, params: { 
-        child: { 
+      post children_url, params: {
+        child: {
           first_name: "",
           birth_date: nil
-        } 
+        }
       }
     end
 
@@ -75,11 +75,11 @@ class ChildrenControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should not update child with invalid attributes" do
-    patch child_url(@child), params: { 
-      child: { 
+    patch child_url(@child), params: {
+      child: {
         first_name: ""
-      } 
+      }
     }
     assert_response :unprocessable_entity
   end
-end 
+end

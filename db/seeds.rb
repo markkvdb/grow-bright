@@ -10,7 +10,7 @@
 
 # Clear existing data
 puts "Clearing existing data..."
-[Child, Caregiver, Feeding, DiaperChange, SleepSession, Activity, Measurement].each(&:destroy_all)
+[ Child, Caregiver, Feeding, DiaperChange, SleepSession, Activity, Measurement ].each(&:destroy_all)
 
 # Create a child
 baby = Child.create!(

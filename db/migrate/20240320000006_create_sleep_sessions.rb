@@ -13,4 +13,4 @@ class CreateSleepSessions < ActiveRecord::Migration[8.0]
       t.index :start_time
     end
   end
-end 
+end

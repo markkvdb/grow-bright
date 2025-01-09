@@ -1,24 +1,24 @@
-# README
+# grow-bright
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails application for tracking and visualizing the growth of your child.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+- Ruby 3.2.2+
+- Node.js 18+
+- Docker (for production deployment)
+- ImageMagick
 
-* System dependencies
+## Quick Start
 
-* Configuration
+TODO
 
-* Database creation
+## Development Setup
 
-* Database initialization
+Clone the repository and run `bin/setup` to install dependencies, set up the database, and seed the database with sample data and run the server.
 
-* How to run the test suite
+To test the application, run `bin/test`.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Deployment
 
-* Deployment instructions
-
-* ...
+TODO

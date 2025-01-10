@@ -2,6 +2,9 @@ require "application_system_test_case"
 
 class ChildrenTest < ApplicationSystemTestCase
   setup do
+    @user = users(:one)
+    sign_in_as(@user)
+
     @child = children(:baby)
   end
 

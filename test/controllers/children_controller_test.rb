@@ -2,6 +2,9 @@ require "test_helper"
 
 class ChildrenControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user = users(:one)
+    sign_in_as(@user)
+
     @child = children(:baby)
   end
 

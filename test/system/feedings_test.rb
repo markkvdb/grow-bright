@@ -2,6 +2,9 @@ require "application_system_test_case"
 
 class FeedingsTest < ApplicationSystemTestCase
   setup do
+    @user = users(:one)
+    sign_in_as(@user)
+
     @child = children(:baby)
     @caregiver = caregivers(:mom)
   end

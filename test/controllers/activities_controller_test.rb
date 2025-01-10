@@ -2,6 +2,9 @@ require "test_helper"
 
 class ActivitiesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user = users(:one)
+    sign_in_as(@user)
+
     @child = children(:baby)
     @caregiver = caregivers(:mom)
     @activity = activities(:tummy_time)

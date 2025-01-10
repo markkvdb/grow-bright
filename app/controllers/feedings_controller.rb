@@ -1,5 +1,5 @@
 class FeedingsController < ApplicationController
-  before_action :set_child
+  include ChildContext
   before_action :set_feeding, only: [ :show, :edit, :update, :destroy ]
 
   FEEDING_BASE_PARAMS = [ :feeding_type, :caregiver_id, :start_time, :end_time, :notes ].freeze

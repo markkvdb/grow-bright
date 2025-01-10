@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  belongs_to :caregiver, optional: true
+  belongs_to :caregiver, optional: false
   has_many :sessions, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }

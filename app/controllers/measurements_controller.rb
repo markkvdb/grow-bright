@@ -1,5 +1,5 @@
 class MeasurementsController < ApplicationController
-  before_action :set_child
+  include ChildContext
   before_action :set_measurement, only: [ :show, :edit, :update, :destroy ]
 
   def index
@@ -43,14 +43,6 @@ class MeasurementsController < ApplicationController
   end
 
   private
-
-  def set_child
-    @child = Child.find(params[:child_id])
-  end
-
-  def set_measurement
-    @measurement = @child.measurements.find(params[:id])
-  end
 
   def measurement_params
     params.require(:measurement).permit(

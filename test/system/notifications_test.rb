@@ -1,6 +1,11 @@
 require "application_system_test_case"
 
 class NotificationsTest < ApplicationSystemTestCase
+  setup do
+    @user = users(:one)
+    sign_in_as(@user)
+  end
+
   test "shows success notification with progress bar" do
     visit new_child_path
 

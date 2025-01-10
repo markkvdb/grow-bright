@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_child
+  include ChildContext
   before_action :set_activity, only: [ :show, :edit, :update, :destroy ]
 
   def index
@@ -44,10 +44,6 @@ class ActivitiesController < ApplicationController
   end
 
   private
-
-  def set_child
-    @child = Child.find(params[:child_id])
-  end
 
   def set_activity
     @activity = @child.activities.find(params[:id])

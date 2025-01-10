@@ -1,11 +1,13 @@
 class ChildrenController < ApplicationController
-  before_action :set_child, only: [ :show, :edit, :update, :destroy ]
+  skip_before_action :set_current_baby, only: [:index]
+  before_action :set_child, except: [:index]
 
   def index
-    @children = Child.all
+    @children = Current.user.caregiver.children.order(:first_name)
   end
 
   def show
+    set_current_baby_id(@child.id)
     @recent_feedings = @child.feedings.order(start_time: :desc).limit(5)
     @recent_diapers = @child.diaper_changes.order(time: :desc).limit(5)
     @recent_activities = @child.activities.order(start_time: :desc).limit(5)
@@ -13,11 +15,11 @@ class ChildrenController < ApplicationController
   end
 
   def new
-    @child = Child.new
+    @child = Current.user.caregiver.children.build
   end
 
   def create
-    @child = Child.new(child_params)
+    @child = Current.user.caregiver.children.build(child_params)
     if @child.save
       redirect_to @child, notice: "Child was successfully recorded."
     else
@@ -38,16 +40,15 @@ class ChildrenController < ApplicationController
 
   def destroy
     @child.destroy
-    redirect_to children_url, notice: "Child was successfully deleted."
+    redirect_to children_path, notice: "Child was successfully deleted."
   end
 
   private
+    def set_child
+      @child = Current.user.caregiver.children.find(params[:id])
+    end
 
-  def set_child
-    @child = Child.find(params[:id])
-  end
-
-  def child_params
+    def child_params
     params.require(:child).permit(
       :first_name,
       :last_name,
@@ -59,5 +60,5 @@ class ChildrenController < ApplicationController
       :avatar,
       caregiver_ids: []
     )
-  end
+    end
 end

@@ -23,19 +23,22 @@ baby = Child.create!(
 mom = Caregiver.create!(
   first_name: "Jane",
   last_name: "Smith",
-  email: "jane@example.com"
+)
+
+user = User.create!(
+  email_address: "jane@example.com",
+  password: "password",
+  caregiver: mom
 )
 
 dad = Caregiver.create!(
   first_name: "John",
   last_name: "Smith",
-  email: "john@example.com"
 )
 
 grandma = Caregiver.create!(
   first_name: "Mary",
   last_name: "Johnson",
-  email: "mary@example.com"
 )
 
 # Create relationships in the join table

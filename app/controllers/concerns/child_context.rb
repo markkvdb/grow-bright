@@ -6,8 +6,8 @@ module ChildContext
   end
 
   private
-    def set_child
-      @child = Current.user.caregiver.children.find(params[:child_id])
-      set_current_baby_id(@child.id)
-    end
-end 
+
+  def set_child
+    @child = Current.user.caregiver.children.find(params[:child_id])
+  end
+end

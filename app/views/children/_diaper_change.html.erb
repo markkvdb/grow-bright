@@ -1,24 +1,24 @@
 <div class="border-b pb-2">
   <div class="flex items-start justify-between">
     <div>
-      <p class="font-medium"><%= change.change_type.titleize %></p>
+      <p class="font-medium"><%= diaper_change.change_type.titleize %></p>
       <p class="text-sm text-gray-600">
-        <%= change.time.strftime("%I:%M %p") %>
+        <%= diaper_change.time.strftime("%I:%M %p") %>
       </p>
       <p class="text-sm text-gray-500">
-        Recorded by <%= change.caregiver.full_name %>
+        Recorded by <%= diaper_change.caregiver.full_name %>
       </p>
     </div>
 
     <div class="flex gap-2">
-      <%= link_to edit_child_diaper_change_path(change.child, change),
+      <%= link_to edit_child_diaper_change_path(diaper_change.child, diaper_change),
           class: "text-gray-400 hover:text-gray-500" do %>
         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
         </svg>
       <% end %>
 
-      <%= button_to child_diaper_change_path(change.child, change),
+      <%= button_to child_diaper_change_path(diaper_change.child, diaper_change),
           method: :delete,
           class: "text-gray-400 hover:text-gray-500",
           form: { data: { turbo_confirm: "Are you sure?" } } do %>

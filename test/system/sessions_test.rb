@@ -30,7 +30,7 @@ class SessionsTest < ApplicationSystemTestCase
     click_button "Sign in"
 
     assert_text "Try another email address or password."
-    assert_current_path session_path
+    assert_current_path new_session_path
   end
 
   test "signing out" do

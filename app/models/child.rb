@@ -22,6 +22,10 @@ class Child < ApplicationRecord
   validates :birth_weight, measured: { greater_than: 0.0 }, allow_nil: true
   validates :birth_length, measured: { greater_than: 0.0 }, allow_nil: true
 
+  accepts_nested_attributes_for :children_caregivers, 
+    allow_destroy: true,
+    reject_if: proc { |attributes| attributes['caregiver_id'].blank? }
+
   def age
     ((Time.zone.now - birth_date.to_time) / 1.year.seconds).floor
   end

@@ -2,11 +2,22 @@ require "test_helper"
 
 class MeasurementsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
-    sign_in_as(@user)
+    @measurement = measurements(:one_month)
+    @child = @measurement.child
+    @caregiver = @child.caregivers.first
+    @user = @caregiver.user
 
-    @child = children(:baby)
-    @caregiver = caregivers(:mom)
+    sign_in_as(@user)
+  end
+
+  test "should get index" do
+    get child_measurements_path(@child)
+    assert_response :success
+  end
+
+  test "should get new" do
+    get new_child_measurement_path(@child)
+    assert_response :success
   end
 
   test "creates measurement" do
@@ -44,22 +55,20 @@ class MeasurementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "updates measurement" do
-    measurement = measurements(:one_month)
-    patch child_measurement_path(@child, measurement), params: {
+    patch child_measurement_path(@child, @measurement), params: {
       measurement: {
         weight_value: 9.0
       }
     }
 
     assert_redirected_to child_path(@child)
-    measurement.reload
-    assert_equal 9.0, measurement.weight_value
+    @measurement.reload
+    assert_equal 9.0, @measurement.weight_value
   end
 
   test "deletes measurement" do
-    measurement = measurements(:one_month)
     assert_difference("Measurement.count", -1) do
-      delete child_measurement_path(@child, measurement)
+      delete child_measurement_path(@child, @measurement)
     end
 
     assert_redirected_to child_path(@child)

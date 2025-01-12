@@ -1,5 +1,6 @@
 class FeedingsController < ApplicationController
   include ChildContext
+
   before_action :set_feeding, only: [ :show, :edit, :update, :destroy ]
 
   FEEDING_BASE_PARAMS = [ :feeding_type, :caregiver_id, :start_time, :end_time, :notes ].freeze
@@ -52,10 +53,6 @@ class FeedingsController < ApplicationController
   end
 
   private
-
-  def set_child
-    @child = Child.find(params[:child_id])
-  end
 
   def set_feeding
     @feeding = @child.feedings.find(params[:id])

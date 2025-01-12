@@ -1,0 +1,50 @@
+<div class="flex items-center space-x-4 p-4 border rounded-lg" data-new-record="<%= form.object.new_record? %>">
+  <div class="flex-1">
+    <% if form.object.caregiver_id == user_caregiver.id %>
+      <%# User's caregiver - disabled select %>
+      <%= form.collection_select :caregiver_id,
+          [user_caregiver], :id, :full_name,
+          { selected: user_caregiver.id },
+          { class: "block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+            disabled: true } %>
+      <%= form.hidden_field :caregiver_id, value: user_caregiver.id %>
+    <% elsif form.object.persisted? %>
+      <%# Existing caregiver - show only their option %>
+      <%= form.collection_select :caregiver_id,
+          [form.object.caregiver], :id, :full_name,
+          { selected: form.object.caregiver_id },
+          class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    <% else %>
+      <%= form.collection_select :caregiver_id,
+          available_caregivers, :id, :full_name,
+          { prompt: "Select a caregiver" },
+          { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
+            data: { 
+              nested_form_target: "select",
+              action: "change->nested-form#caregiverSelected"
+            } } %>
+    <% end %>
+  </div>
+
+  <div class="flex-1">
+    <%= form.select :relationship,
+        ChildrenCaregiver::RELATIONSHIPS.map { |r| [r.titleize, r] },
+        { selected: form.object.relationship || "parent" },
+        class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+  </div>
+
+  <%# Only show remove button for non-user caregivers %>
+  <% unless form.object.caregiver_id == user_caregiver.id %>
+    <div>
+      <button type="button" 
+              data-action="click->nested-form#remove" 
+              class="text-red-600 hover:text-red-800">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :_destroy unless form.object.new_record? %>
+</div> 

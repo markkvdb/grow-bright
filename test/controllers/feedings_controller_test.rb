@@ -2,11 +2,23 @@ require "test_helper"
 
 class FeedingsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @feeding = feedings(:bottle_feeding)
+    @child = @feeding.child
+    @caregiver = @feeding.caregiver
     @user = users(:one)
-    sign_in_as(@user)
+    @user.update!(caregiver: @caregiver)
 
-    @child = children(:baby)
-    @caregiver = caregivers(:mom)
+    sign_in_as(@user)
+  end
+
+  test "should get index" do
+    get child_feedings_path(@child)
+    assert_response :success
+  end
+
+  test "should get new" do
+    get new_child_feeding_path(@child)
+    assert_response :success
   end
 
   test "creates bottle feeding with volume params" do
@@ -92,5 +104,16 @@ class FeedingsControllerTest < ActionDispatch::IntegrationTest
     feeding = Feeding.last
     assert_nil feeding&.weight_value
     assert_nil feeding&.weight_unit
+  end
+
+  test "updates feeding" do
+    patch child_feeding_path(@child, @feeding), params: {
+      feeding: {
+        notes: "Updated notes"
+      }
+    }
+
+    assert_redirected_to child_path(@child)
+    assert_equal "Updated notes", @feeding.reload.notes
   end
 end

@@ -1,9 +1,10 @@
-<% content_for :breadcrumb_action, "Edit Feeding" %>
+<%= render "shared/page_container" do %>
+  <div class="max-w-md w-full mx-auto space-y-8 p-8 bg-white rounded-xl shadow-lg">
+    <div class="text-center">
+      <h2 class="mt-4 text-3xl font-extrabold text-gray-900">Edit Feeding</h2>
+      <p class="mt-2 text-sm text-gray-600">Update <%= @child.first_name %>'s feeding</p>
+    </div>
 
-<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div class="mb-8">
-    <h1 class="text-3xl font-bold">Edit Feeding for <%= @child.first_name %></h1>
+    <%= render "form", feeding: @feeding %>
   </div>
-
-  <%= render "form", feeding: @feeding %>
-</div> 
+<% end %> 

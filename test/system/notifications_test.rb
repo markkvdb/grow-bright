@@ -11,7 +11,8 @@ class NotificationsTest < ApplicationSystemTestCase
 
     fill_in "First name", with: "Test Child"
     fill_in "Birth date", with: "2023-01-01"
-    click_button "Create Child"
+    
+    click_button "Add Child"
 
     # Verify success notification appears
     assert_selector "[data-notification-target='notification']"
@@ -33,7 +34,7 @@ class NotificationsTest < ApplicationSystemTestCase
     fill_in "First name", with: "Test Child"
     fill_in "Birth date", with: "2023-01-01"
 
-    click_on "Create Child"
+    click_on "Add Child"
 
     assert_selector ".border-green-500"
 
@@ -45,7 +46,7 @@ class NotificationsTest < ApplicationSystemTestCase
     visit new_child_path
 
     # Submit form without required fields
-    click_button "Create Child"
+    click_button "Add Child"
 
     # Verify error notification appears
     assert_text "prohibited this child from being saved"

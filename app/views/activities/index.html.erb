@@ -1,15 +1,16 @@
-<div class="px-4 sm:px-6 lg:px-8 py-10">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold leading-6 text-gray-900">Activities</h1>
-      <p class="mt-2 text-sm text-gray-700">Monitor your baby's daily activities and routines.</p>
+<%= render "shared/page_container" do %>
+  <div class="bg-white rounded-xl shadow-lg p-8">
+    <div class="sm:flex sm:items-center">
+      <div class="sm:flex-auto">
+        <h1 class="text-base font-semibold leading-6 text-gray-900">Activities</h1>
+        <p class="mt-2 text-sm text-gray-700">Monitor your baby's daily activities and routines.</p>
+      </div>
+      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        <%= render "shared/button", href: new_child_activity_path(@child) do %>
+          Add activity
+        <% end %>
+      </div>
     </div>
-    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-      <%= link_to new_child_activity_path(@child), class: "block rounded-md bg-green-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" do %>
-        Add activity
-      <% end %>
-    </div>
-  </div>
   
   <div class="mt-8 flow-root">
     <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -53,4 +54,5 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
+<% end %>

@@ -2,10 +2,12 @@ require "test_helper"
 
 class ChildrenControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
-    sign_in_as(@user)
-
     @child = children(:baby)
+    @caregiver = @child.caregivers.first
+    @user = users(:one)
+    @user.update!(caregiver: @caregiver)
+
+    sign_in_as(@user)
   end
 
   test "should get index" do

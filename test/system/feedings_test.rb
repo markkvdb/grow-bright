@@ -22,7 +22,7 @@ class FeedingsTest < ApplicationSystemTestCase
     # Verify ml unit is displayed
     assert_text "ml"
 
-    click_on "Create Feeding"
+    click_on "Add Feeding"
 
     assert_text "Feeding was successfully recorded"
   end
@@ -40,7 +40,7 @@ class FeedingsTest < ApplicationSystemTestCase
     # Verify g unit is displayed
     assert_text "g"
 
-    click_on "Create Feeding"
+    click_on "Add Feeding"
 
     assert_text "Feeding was successfully recorded"
   end
@@ -56,7 +56,7 @@ class FeedingsTest < ApplicationSystemTestCase
 
     select "Left", from: "Side"
 
-    click_on "Create Feeding"
+    click_on "Add Feeding"
 
     assert_text "Feeding was successfully recorded"
   end

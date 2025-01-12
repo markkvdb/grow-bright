@@ -1,74 +1,76 @@
-<div class="container mx-auto px-4 py-8">
-  <div class="mb-6">
-    <div class="flex items-center space-x-4">
-      <%= render "avatar", 
-          child: @child,
-          css_classes: "h-24 w-24 rounded-full object-cover" %>
-      <div>
-        <div class="flex justify-between items-center">
-          <h1 class="text-2xl font-bold text-gray-900"><%= @child.first_name %></h1>
-          <div class="space-x-2">
-            <%= link_to "Edit", edit_child_path(@child), 
-                class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
-            <%= link_to "Back", children_path, 
-                class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" %>
+<%= render "shared/page_container" do %>
+  <div class="bg-white rounded-xl shadow-lg p-8">
+    <!-- Header section -->
+    <div class="sm:flex sm:items-center sm:justify-between">
+      <div class="flex items-center">
+        <% if @child.avatar.attached? %>
+          <%= image_tag @child.avatar.variant(:medium), 
+              class: "h-24 w-24 rounded-full object-cover",
+              alt: "#{@child.first_name}'s avatar" %>
+        <% else %>
+          <div class="h-24 w-24 rounded-full bg-gray-100 flex items-center justify-center">
+            <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
           </div>
+        <% end %>
+        <div class="ml-4">
+          <h1 class="text-2xl font-bold text-gray-900"><%= @child.first_name %>'s Dashboard</h1>
+          <p class="mt-1 text-sm text-gray-700"><%= display_age(@child) %></p>
         </div>
-        <p class="text-gray-600">
-          Age: <%= display_age(@child) %>
-          (<%= @child.birth_date.strftime("%B %d, %Y") %>)
-        </p>
+      </div>
+      <div class="mt-4 sm:mt-0">
+        <%= render "shared/button", href: edit_child_path(@child), variant: :secondary do %>
+          Edit Child
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Recent activities grid -->
+    <div class="mt-8 grid gap-6 grid-cols-1 lg:grid-cols-2">
+      <!-- Feedings section -->
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-gray-900">Recent Feedings</h2>
+          <%= render "shared/button", href: child_feedings_path(@child), variant: :secondary do %>
+            View all
+          <% end %>
+        </div>
+          <%= render partial: "feeding", collection: @recent_feedings, as: :feeding %>
+      </div>
+
+      <!-- Diapers section -->
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-gray-900">Recent Diaper Changes</h2>
+          <%= render "shared/button", href: child_diaper_changes_path(@child), variant: :secondary do %>
+            View all
+          <% end %>
+        </div>
+        <%= render partial: "diaper_change", collection: @recent_diapers, as: :diaper_change %>
+      </div>
+
+      <!-- Activities section -->
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-gray-900">Recent Activities</h2>
+          <%= render "shared/button", href: child_activities_path(@child), variant: :secondary do %>
+            View all
+          <% end %>
+        </div>
+        <%= render partial: "activity", collection: @recent_activities, as: :activity %>
+      </div>
+
+      <!-- Measurements section -->
+      <div class="bg-white rounded-lg border border-gray-200 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-semibold text-gray-900">Recent Measurements</h2>
+          <%= render "shared/button", href: child_measurements_path(@child), variant: :secondary do %>
+            View all
+          <% end %>
+        </div>
+        <%= render partial: "measurement", collection: @recent_measurements, as: :measurement %>
       </div>
     </div>
   </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <!-- Recent Feedings -->
-    <div class="bg-white rounded-lg shadow p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">Recent Feedings</h2>
-        <%= link_to "Add Feeding", new_child_feeding_path(@child), 
-            class: "text-blue-500 hover:text-blue-700" %>
-      </div>
-      <div class="space-y-3">
-        <%= render partial: "feeding", collection: @recent_feedings %>
-      </div>
-    </div>
-
-    <!-- Recent Diaper Changes -->
-    <div class="bg-white rounded-lg shadow p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">Recent Diaper Changes</h2>
-        <%= link_to "Add Change", new_child_diaper_change_path(@child), 
-            class: "text-blue-500 hover:text-blue-700" %>
-      </div>
-      <div class="space-y-3">
-        <%= render partial: "diaper_change", collection: @recent_diapers, as: :change %>
-      </div>
-    </div>
-
-    <!-- Recent Activities -->
-    <div class="bg-white rounded-lg shadow p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">Recent Activities</h2>
-        <%= link_to "Add Activity", new_child_activity_path(@child), 
-            class: "text-blue-500 hover:text-blue-700" %>
-      </div>
-      <div class="space-y-3">
-        <%= render partial: "activity", collection: @recent_activities %>
-      </div>
-    </div>
-
-    <!-- Latest Measurements -->
-    <div class="bg-white rounded-lg shadow p-6">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">Latest Measurements</h2>
-        <%= link_to "Add Measurement", new_child_measurement_path(@child), 
-            class: "text-blue-500 hover:text-blue-700" %>
-      </div>
-      <div class="space-y-3">
-        <%= render partial: "measurement", collection: @recent_measurements %>
-      </div>
-    </div>
-  </div>
-</div> 
+<% end %> 

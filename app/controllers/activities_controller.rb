@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
   include ChildContext
+
   before_action :set_activity, only: [ :show, :edit, :update, :destroy ]
 
   def index

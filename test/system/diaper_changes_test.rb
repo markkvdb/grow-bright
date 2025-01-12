@@ -18,7 +18,7 @@ class DiaperChangesTest < ApplicationSystemTestCase
     # Verify solid fields are hidden
     assert_selector "[data-diaper-change-target='solidFields']", visible: false
 
-    click_on "Create Diaper change"
+    click_on "Add Diaper Change"
 
     assert_text "Diaper change was successfully recorded"
   end
@@ -35,7 +35,7 @@ class DiaperChangesTest < ApplicationSystemTestCase
     select "Brown", from: "Color"
     select "Normal", from: "Consistency"
 
-    click_on "Create Diaper change"
+    click_on "Add Diaper Change"
 
     assert_text "Diaper change was successfully recorded"
   end
@@ -53,7 +53,7 @@ class DiaperChangesTest < ApplicationSystemTestCase
     select "Loose", from: "Consistency"
     fill_in "Notes", with: "Test notes"
 
-    click_on "Create Diaper change"
+    click_on "Add Diaper Change"
 
     assert_text "Diaper change was successfully recorded"
   end

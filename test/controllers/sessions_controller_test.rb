@@ -12,7 +12,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should login with valid credentials" do
-    @user = User.create!(email_address: "test@example.com", password: "password")
+    @user = User.create!(email_address: "test@example.com", password: "password", caregiver: caregivers(:mom))
 
     post session_url, params: { 
       email_address: @user.email_address,

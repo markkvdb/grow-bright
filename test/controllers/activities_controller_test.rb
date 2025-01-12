@@ -2,12 +2,13 @@ require "test_helper"
 
 class ActivitiesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:one)
-    sign_in_as(@user)
-
-    @child = children(:baby)
-    @caregiver = caregivers(:mom)
     @activity = activities(:tummy_time)
+    @child = @activity.child
+    @caregiver = @child.caregivers.first
+    @user = users(:one)
+    @user.update(caregiver: @caregiver)
+
+    sign_in_as(@user)
   end
 
   test "creates activity" do
@@ -49,22 +50,20 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "updates activity" do
-    activity = activities(:tummy_time)
-    patch child_activity_path(@child, activity), params: {
+    patch child_activity_path(@child, @activity), params: {
       activity: {
         notes: "Updated notes"
       }
     }
 
     assert_redirected_to child_path(@child)
-    activity.reload
-    assert_equal "Updated notes", activity.notes
+    @activity.reload
+    assert_equal "Updated notes", @activity.notes
   end
 
   test "deletes activity" do
-    activity = activities(:tummy_time)
     assert_difference("Activity.count", -1) do
-      delete child_activity_path(@child, activity)
+      delete child_activity_path(@child, @activity)
     end
 
     assert_redirected_to child_path(@child)

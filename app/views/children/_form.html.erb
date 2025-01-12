@@ -48,16 +48,55 @@
       </div>
     </div>
 
-    <div class="col-span-2">
+    <%# Get current caregivers and available ones %>
+    <% user_caregiver = Current.user.caregiver %>
+    <% existing_caregiver_ids = form.object.children_caregivers.map(&:caregiver_id) %>
+    <% available_caregivers = Caregiver.where.not(id: existing_caregiver_ids + [user_caregiver.id]) %>
+
+    <div class="col-span-2" 
+         data-controller="nested-form"
+         data-nested-form-available-caregivers-value="<%= available_caregivers.map { |c| { id: c.id, name: c.full_name } }.to_json %>">
       <%= form.label :caregiver_ids, "Caregivers", class: "block text-sm font-medium text-gray-700" %>
-      <div class="mt-1 grid grid-cols-2 md:grid-cols-3 gap-4">
-        <%= form.collection_check_boxes :caregiver_ids, Caregiver.all, :id, :full_name do |b| %>
-          <div class="flex items-center">
-            <%= b.check_box(class: "h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500") %>
-            <%= b.label(class: "ml-2 block text-sm text-gray-900") %>
-          </div>
+
+      
+      <%# Template for new caregivers %>
+      <template data-nested-form-target="template">
+        <%= form.fields_for :children_caregivers, ChildrenCaregiver.new, child_index: 'NEW_RECORD' do |cf| %>
+          <%= render "caregiver_fields", 
+              form: cf, 
+              available_caregivers: available_caregivers,
+              user_caregiver: user_caregiver %>
+        <% end %>
+      </template>
+
+      <div data-nested-form-target="entries" class="mt-1 grid grid-cols-1 gap-4">
+        <%# Always show user's caregiver first %>
+        <%= form.fields_for :children_caregivers, form.object.children_caregivers.find_or_initialize_by(caregiver: user_caregiver) do |cf| %>
+          <%= render "caregiver_fields", 
+              form: cf, 
+              available_caregivers: available_caregivers,
+              user_caregiver: user_caregiver %>
+        <% end %>
+
+        <%# Show other caregivers %>
+        <%= form.fields_for :children_caregivers, form.object.children_caregivers.reject { |cc| cc.caregiver_id == user_caregiver.id } do |cf| %>
+          <%= render "caregiver_fields", 
+              form: cf, 
+              available_caregivers: available_caregivers,
+              user_caregiver: user_caregiver %>
         <% end %>
       </div>
+
+      <% if available_caregivers.any? %>
+        <div class="mt-4" data-nested-form-target="addButton">
+          <%= render "shared/button", 
+              variant: :secondary, 
+              type: "button",
+              data: { action: "click->nested-form#add" } do %>
+            Add Another Caregiver
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div>
@@ -77,8 +116,9 @@
     </div>
   </div>
 
-  <div class="flex justify-end space-x-3">
-    <%= link_to "Cancel", children_path, class: "px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
-    <%= form.submit class: "px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+  <div class="flex justify-end">
+    <%= render "shared/button", type: "submit" do %>
+      <%= child.new_record? ? "Add Child" : "Update Child" %>
+    <% end %>
   </div>
 <% end %> 

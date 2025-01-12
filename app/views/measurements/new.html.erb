@@ -1,12 +1,10 @@
-<% content_for :breadcrumb_action, "New Measurement" %>
+<%= render "shared/page_container" do %>
+  <div class="max-w-2xl mx-auto p-8 bg-white rounded-xl shadow-lg">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-extrabold text-gray-900">New Measurement</h2>
+      <p class="mt-2 text-sm text-gray-600">Record <%= @child.first_name %>'s measurements</p>
+    </div>
 
-<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-  <div class="mb-8">
-    <h1 class="text-2xl font-bold text-gray-900">Record Measurement</h1>
-    <p class="mt-2 text-sm text-gray-600">
-      Record measurements for <%= @child.first_name %>
-    </p>
+    <%= render "form", measurement: @measurement %>
   </div>
-
-  <%= render "form", child: @child, measurement: @measurement %>
-</div> 
+<% end %> 

@@ -1,5 +1,7 @@
 class DiaperChangesController < ApplicationController
-  before_action :set_child
+  include CurrentChild
+  include ChildContext
+
   before_action :set_diaper_change, only: [ :show, :edit, :update, :destroy ]
 
   DIAPER_BASE_PARAMS = [ :change_type, :caregiver_id, :time, :notes ].freeze
@@ -50,10 +52,6 @@ class DiaperChangesController < ApplicationController
   end
 
   private
-
-  def set_child
-    @child = Child.find(params[:child_id])
-  end
 
   def set_diaper_change
     @diaper_change = @child.diaper_changes.find(params[:id])

@@ -18,7 +18,7 @@ class MeasurementsTest < ApplicationSystemTestCase
 
     select @caregiver.full_name, from: "Caregiver"
 
-    click_on "Create Measurement"
+    click_on "Add Measurement"
 
     assert_text "Measurement was successfully recorded"
   end

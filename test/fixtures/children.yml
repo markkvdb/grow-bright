@@ -1,4 +1,17 @@
 baby:
-  first_name: "Baby"
-  last_name: "Smith"
-  birth_date: <%= 6.months.ago %> 
+  first_name: Baby
+  last_name: Doe
+  birth_date: <%= 6.months.ago %>
+  birth_weight_value: 3.5
+  birth_weight_unit: kg
+  birth_length_value: 50
+  birth_length_unit: cm
+
+toddler:
+  first_name: Toddler
+  last_name: Doe
+  birth_date: <%= 2.years.ago %>
+  birth_weight_value: 3.2
+  birth_weight_unit: kg
+  birth_length_value: 48
+  birth_length_unit: cm

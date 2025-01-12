@@ -17,7 +17,7 @@ class ActivitiesTest < ApplicationSystemTestCase
     select @caregiver.full_name, from: "Caregiver"
     fill_in "Notes", with: "Regular tummy time session"
 
-    click_on "Create Activity"
+    click_on "Add Activity"
 
     assert_text "Activity was successfully recorded"
   end
@@ -30,7 +30,7 @@ class ActivitiesTest < ApplicationSystemTestCase
     check "Is this a milestone?"
     fill_in "Notes", with: "First time grabbing toy!"
 
-    click_on "Create Activity"
+    click_on "Add Activity"
 
     assert_text "Activity was successfully recorded"
   end
@@ -70,7 +70,7 @@ class ActivitiesTest < ApplicationSystemTestCase
     # Wait for direct upload to complete
     assert_selector ".border-green-500", count: 2
 
-    click_on "Create Activity"
+    click_on "Add Activity"
 
     assert_text "Activity was successfully recorded"
     assert_selector "img[src*='test_image1']"
@@ -122,7 +122,7 @@ class ActivitiesTest < ApplicationSystemTestCase
 
     attach_file "activity[image_files][]", [ Rails.root.join("test/fixtures/files/test_image1.jpg") ]
 
-    click_on "Create Activity"
+    click_on "Add Activity"
 
     assert_text "Activity was successfully recorded"
     assert_selector "img[src*='test_image1.jpg']"
@@ -153,7 +153,7 @@ class ActivitiesTest < ApplicationSystemTestCase
       Rails.root.join("test/fixtures/files/test_image2.jpg")
     ]
 
-    click_on "Create Activity"
+    click_on "Add Activity"
 
     assert_text "Activity was successfully recorded"
 

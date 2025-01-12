@@ -26,7 +26,7 @@ class ChildrenTest < ApplicationSystemTestCase
     
     # Add another caregiver
     click_on "Add Another Caregiver"
-    within(".grid[data-nested-form-target='entries']") do
+    within(".grid[data-child-target='entries']") do
       # Select the new caregiver
       select @other_caregiver.full_name, from: "child[children_caregivers_attributes][1][caregiver_id]"
       select "Grandparent", from: "child[children_caregivers_attributes][1][relationship]"
@@ -52,7 +52,7 @@ class ChildrenTest < ApplicationSystemTestCase
 
     # Add another caregiver
     click_on "Add Another Caregiver"
-    within(".grid[data-nested-form-target='entries']") do
+    within(".grid[data-child-target='entries']") do
       select @other_caregiver.full_name, from: "child[children_caregivers_attributes][1][caregiver_id]"
       select "Nanny", from: "child[children_caregivers_attributes][1][relationship]"
     end
@@ -75,14 +75,14 @@ class ChildrenTest < ApplicationSystemTestCase
     visit edit_child_path(child)
 
     # The user's caregiver should not have a remove button
-    within(".grid[data-nested-form-target='entries']") do
+    within(".grid[data-child-target='entries']") do
       within(all(".flex.items-center")[0]) do
-        assert_no_selector "button[data-action='click->nested-form#remove']"
+        assert_no_selector "button[data-action='click->child#remove']"
       end
       
       # Remove the other caregiver
       within(all(".flex.items-center")[1]) do
-        find("button[data-action='click->nested-form#remove']").click
+        find("button[data-action='click->child#remove']").click
       end
     end
 
@@ -104,7 +104,7 @@ class ChildrenTest < ApplicationSystemTestCase
 
     # Add two caregivers
     click_on "Add Another Caregiver"
-    within(".grid[data-nested-form-target='entries']") do
+    within(".grid[data-child-target='entries']") do
       select @other_caregiver.full_name
     end
     

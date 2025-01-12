@@ -54,32 +54,30 @@
 
     <%# Get current caregivers and available ones %>
     <% user_caregiver = Current.user.caregiver %>
-    <% existing_caregiver_ids = form.object.children_caregivers.map(&:caregiver_id) %>
-    <% available_caregivers = Caregiver.where.not(id: existing_caregiver_ids + [user_caregiver.id]) %>
+    <% available_caregivers = Caregiver.where.not(id: user_caregiver.id) %>
 
     <div class="col-span-1 md:col-span-2" 
-         data-controller="nested-form"
-         data-nested-form-available-caregivers-value="<%= available_caregivers.map { |c| { id: c.id, name: c.full_name } }.to_json %>">
+         data-controller="child">
       <%= form.label :caregiver_ids, "Caregivers", class: "block text-sm font-medium text-gray-700" %>
 
       
       <%# Template for new caregivers %>
-      <template data-nested-form-target="template">
+      <template data-child-target="template">
         <%= form.fields_for :children_caregivers, ChildrenCaregiver.new, child_index: 'NEW_RECORD' do |cf| %>
           <%= render "caregiver_fields", 
               form: cf, 
               available_caregivers: available_caregivers,
-              user_caregiver: user_caregiver %>
+              choice_disabled: false %>
         <% end %>
       </template>
 
-      <div data-nested-form-target="entries" class="mt-1 grid grid-cols-1 gap-4">
+      <div data-child-target="entries" class="mt-1 grid grid-cols-1 gap-4">
         <%# Always show user's caregiver first %>
         <%= form.fields_for :children_caregivers, form.object.children_caregivers.find_or_initialize_by(caregiver: user_caregiver) do |cf| %>
           <%= render "caregiver_fields", 
               form: cf, 
-              available_caregivers: available_caregivers,
-              user_caregiver: user_caregiver %>
+              available_caregivers: [user_caregiver],
+              choice_disabled: true %>
         <% end %>
 
         <%# Show other caregivers %>
@@ -87,16 +85,16 @@
           <%= render "caregiver_fields", 
               form: cf, 
               available_caregivers: available_caregivers,
-              user_caregiver: user_caregiver %>
+              choice_disabled: false %>
         <% end %>
       </div>
 
       <% if available_caregivers.any? %>
-        <div class="mt-4" data-nested-form-target="addButton">
+        <div class="mt-4" data-child-target="addButton">
           <%= render "shared/button", 
               variant: :secondary, 
               type: "button",
-              data: { action: "click->nested-form#add" } do %>
+              data: { action: "click->child#add" } do %>
             Add Another Caregiver
           <% end %>
         </div>

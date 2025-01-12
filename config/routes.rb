@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :children do
     resources :feedings
-    resources :diaper_changes
+    resources :diaper_changes, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :activities
     resources :measurements
   end

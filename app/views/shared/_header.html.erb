@@ -27,7 +27,8 @@
 
         <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-6">
           <div class="relative" data-controller="dropdown">
-            <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" data-action="dropdown#toggle">
+            <button type="button" class="flex items-center gap-x-2 text-sm font-semibold leading-6 text-gray-900" data-action="dropdown#toggle">
+              <%= render "shared/avatar", image: @current_child.avatar, size: :small %>
               <%= @current_child.first_name %>
               <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -36,17 +37,20 @@
             <div class="absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none hidden" data-dropdown-target="menu">
               <% Current.user.caregiver.children.each do |child| %>
                 <% if child.persisted? %>
-                  <%= link_to child.first_name, child_path(child), class: "block px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-50" %>
+                  <%= link_to child_path(child), class: "block px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-50 flex items-center gap-x-2" do %>
+                    <%= render "shared/avatar", image: child.avatar, size: :small %>
+                    <%= child.first_name %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>
           </div>
       <% end %>
 
-      <%= button_to session_path, method: :delete, class: "text-sm font-semibold leading-6 text-gray-900" do %>
-          Sign out <span aria-hidden="true">&rarr;</span>
-    <% end %>
-      </div>
+          <%= button_to session_path, method: :delete, class: "text-sm font-semibold leading-6 text-gray-900" do %>
+            Sign out <span aria-hidden="true">&rarr;</span>
+          <% end %>
+        </div>
     <% end %>
   </nav>
 </header> 

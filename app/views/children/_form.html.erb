@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
     <div>
       <%= form.label :first_name, class: "block text-sm font-medium text-gray-700" %>
       <%= form.text_field :first_name, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
@@ -26,25 +26,29 @@
       <%= form.date_field :birth_date, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
     </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <%= form.label :birth_weight_value, "Birth Weight", class: "block text-sm font-medium text-gray-700" %>
-        <%= form.number_field :birth_weight_value, step: "0.01", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
-      </div>
-      <div>
-        <%= form.label :birth_weight_unit, "Unit", class: "block text-sm font-medium text-gray-700" %>
-        <%= form.select :birth_weight_unit, ["kg", "lb"], {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    <div>
+      <%= form.label :birth_weight_value, "Birth Weight", class: "block text-sm font-medium text-gray-700" %>
+      <div class="mt-1 relative rounded-md shadow-sm">
+        <%= form.number_field :birth_weight_value, 
+            step: "0.01",
+            class: "block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 pr-12" %>
+        <%= form.hidden_field :birth_weight_unit, value: "kg" %>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+          <span class="text-gray-500 sm:text-sm">kg</span>
+        </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <%= form.label :birth_length_value, "Birth Length", class: "block text-sm font-medium text-gray-700" %>
-        <%= form.number_field :birth_length_value, step: "0.1", class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
-      </div>
-      <div>
-        <%= form.label :birth_length_unit, "Unit", class: "block text-sm font-medium text-gray-700" %>
-        <%= form.select :birth_length_unit, ["cm", "in"], {}, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+    <div>
+      <%= form.label :birth_length_value, "Birth Length", class: "block text-sm font-medium text-gray-700" %>
+      <div class="mt-1 relative rounded-md shadow-sm">
+        <%= form.number_field :birth_length_value,
+            step: "0.1",
+            class: "block w-full rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 pr-12" %>
+        <%= form.hidden_field :birth_length_unit, value: "cm" %>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+          <span class="text-gray-500 sm:text-sm">cm</span>
+        </div>
       </div>
     </div>
 
@@ -53,7 +57,7 @@
     <% existing_caregiver_ids = form.object.children_caregivers.map(&:caregiver_id) %>
     <% available_caregivers = Caregiver.where.not(id: existing_caregiver_ids + [user_caregiver.id]) %>
 
-    <div class="col-span-2" 
+    <div class="col-span-1 md:col-span-2" 
          data-controller="nested-form"
          data-nested-form-available-caregivers-value="<%= available_caregivers.map { |c| { id: c.id, name: c.full_name } }.to_json %>">
       <%= form.label :caregiver_ids, "Caregivers", class: "block text-sm font-medium text-gray-700" %>

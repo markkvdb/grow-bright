@@ -10,6 +10,19 @@ class DiaperChangesControllerTest < ActionDispatch::IntegrationTest
     sign_in_as(@user)
   end
 
+  test "should get index" do
+    get child_diaper_changes_url(@child)
+    assert_response :success
+  end
+
+  test "should create diaper change" do
+    assert_difference('DiaperChange.count') do
+      post child_diaper_changes_url(@child), params: { diaper_change: { time: Time.current, caregiver_id: @caregiver.id, change_type: "wet", notes: "Changed at home" } }
+    end
+
+    assert_redirected_to child_path(@child)
+  end
+
   test "creates wet diaper change" do
     assert_difference("DiaperChange.count") do
       post child_diaper_changes_path(@child), params: {
@@ -63,3 +76,4 @@ class DiaperChangesControllerTest < ActionDispatch::IntegrationTest
     assert_nil diaper_change&.consistency
   end
 end
+

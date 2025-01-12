@@ -9,17 +9,9 @@
     <div class="mt-8 space-y-4">
       <% @children.each do |child| %>
         <%= link_to child_path(child), class: "flex items-center p-4 border rounded-lg hover:border-green-500 transition-colors duration-150" do %>
-          <% if child.avatar.attached? %>
-            <%= image_tag child.avatar.variant(:thumb), 
-                class: "h-10 w-10 rounded-full object-cover",
-                alt: "#{child.first_name}'s avatar" %>
-          <% else %>
-            <div class="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center">
-              <svg class="h-6 w-6 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            </div>
-          <% end %>
+          <div class="child-card">
+            <%= render "shared/avatar", image: child.avatar, size: :medium %>
+          </div>
           <div class="ml-3">
             <p class="text-sm font-medium text-gray-900"><%= child.first_name %></p>
             <p class="text-xs text-gray-500"><%= display_age(child) %></p>

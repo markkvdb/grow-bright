@@ -2,11 +2,30 @@ require "application_system_test_case"
 
 class DiaperChangesTest < ApplicationSystemTestCase
   setup do
-    @user = users(:one)
-    sign_in_as(@user)
-
     @child = children(:baby)
-    @caregiver = caregivers(:mom)
+    @user = users(:one)
+    @caregiver = @child.caregivers.first
+    sign_in_as(@user)
+  end
+
+  test "visiting the diaper changes index" do
+    visit child_diaper_changes_path(@child)
+
+    assert_selector "h1", text: "Diaper Changes for #{@child.first_name}"
+    assert_text "Add Diaper Change"
+
+    @child.diaper_changes.each do |diaper_change|
+      assert_text diaper_change.time.strftime("%B %d, %Y %I:%M %p")
+      assert_text diaper_change.change_type.titleize
+      assert_text diaper_change.notes.presence || "None"
+    end
+  end
+
+  test "navigating to new diaper change from index" do
+    visit child_diaper_changes_path(@child)
+    click_on "Add Diaper Change"
+    
+    assert_current_path new_child_diaper_change_path(@child)
   end
 
   test "creating a wet diaper change" do

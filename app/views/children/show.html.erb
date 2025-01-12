@@ -3,17 +3,9 @@
     <!-- Header section -->
     <div class="sm:flex sm:items-center sm:justify-between">
       <div class="flex items-center">
-        <% if @child.avatar.attached? %>
-          <%= image_tag @child.avatar.variant(:medium), 
-              class: "h-24 w-24 rounded-full object-cover",
-              alt: "#{@child.first_name}'s avatar" %>
-        <% else %>
-          <div class="h-24 w-24 rounded-full bg-gray-100 flex items-center justify-center">
-            <svg class="h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-          </div>
-        <% end %>
+        <div class="child-header">
+          <%= render "shared/avatar", image: @child.avatar, size: :large %>
+        </div>
         <div class="ml-4">
           <h1 class="text-2xl font-bold text-gray-900"><%= @child.first_name %>'s Dashboard</h1>
           <p class="mt-1 text-sm text-gray-700"><%= display_age(@child) %></p>

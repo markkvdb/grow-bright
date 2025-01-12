@@ -10,7 +10,7 @@
     </div>
   <% end %>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-controller="activity">
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2" data-controller="activity">
     <div>
       <%= form.label :activity_type, class: "block text-sm font-medium text-gray-700" %>
       <%= form.select :activity_type, 
@@ -45,14 +45,14 @@
       <% end %>
     </div>
 
-    <div class="col-span-2">
+    <div class="col-span-1 md:col-span-2">
       <%= form.label :notes, class: "block text-sm font-medium text-gray-700" %>
       <%= form.text_area :notes, rows: 3,
           class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500",
           placeholder: "Add any details about this activity. For milestones, describe what your child achieved (e.g., 'Rolled over for the first time!' or 'Grabbed and held rattle for 30 seconds')." %>
     </div>
 
-    <div class="col-span-2" 
+    <div class="col-span-1 md:col-span-2" 
          data-controller="activity-images" 
          data-activity-images-url-value="<%= rails_direct_uploads_path %>">
       <%= form.label :images, class: "block text-sm font-medium text-gray-700 mb-2" %>

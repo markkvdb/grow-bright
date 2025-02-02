@@ -67,4 +67,4 @@ gem "tailwindcss-rails", "~> 3.3"
 # Measured gem for unit validation
 gem "measured"
 
-gem "launchy", "~> 3.0"
+gem "launchy", "~> 3.1"
